@@ -1,0 +1,68 @@
+<!-- <body>
+  <header>
+    <nav>
+      <ul class="base_navigation">
+        <li>
+          <a routerLink="/home"
+            ><img src="assets/home.png" width="80px" height="80px"
+          /></a>
+        </li>
+        <li>
+          <a routerLink="/calendar"
+            ><img src="assets/calendar.png" width="80px" height="80px"
+          /></a>
+        </li>
+        <li>
+          <a routerLink="/teams"
+            ><img src="assets/group-chat.png" width="80px" height="80px"
+          /></a>
+        </li>
+        <li>
+          <a routerLink="/messages"
+            ><img src="assets/comment.png" width="80px" height="80px"
+          /></a>
+        </li>
+        <li>
+          <a routerLink="/statistics"
+            ><img src="assets/chart.png" width="80px" height="80px"
+          /></a>
+        </li>
+        <li>
+          <a routerLink="/profile"
+            ><img src="assets/profile-user.png" width="80px" height="80px"
+          /></a>
+        </li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/register">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section><router-outlet></router-outlet></section>
+  <footer>
+    <ul class="base_navigation">
+      <li>
+        <a routerLink="/home"
+          ><img src="assets/logo.png" width="80px" height="80px"
+        /></a>
+      </li>
+      <li>
+        <a routerLink="/statute">Regulamin i polityka prywatności</a>
+      </li>
+    </ul>
+  </footer>
+</body> -->
+
+<!-- <nb-layout>
+  <nb-layout-header><nb-menu [items]="items"></nb-menu></nb-layout-header>
+  <nb-layout-footer></nb-layout-footer>
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout> -->
+
+<nb-layout>
+  <nb-sidebar><nb-menu [items]="items"></nb-menu></nb-sidebar>
+  <nb-layout-column class="colored-column-success"
+    ><router-outlet></router-outlet
+  ></nb-layout-column>
+</nb-layout>
