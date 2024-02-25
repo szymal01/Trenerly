@@ -10,42 +10,42 @@ export class AppComponent implements OnInit {
   title = 'frontend';
   items: NbMenuItem[] = [
     {
-      title: 'HOME',
+      title: 'STRONA GŁÓWNA',
       link: '/home',
     },
     {
-      title: 'CALENDAR',
+      title: 'KALENDARZ',
       link: '/calendar',
     },
     {
-      title: 'TEAMS',
+      title: 'DRUŻYNY',
       link: '/teams',
     },
     {
-      title: 'MESSAGES',
+      title: 'WIADOMOŚCI',
       link: '/messages',
     },
     {
-      title: 'STATISTICS',
+      title: 'STATYSTYKI',
       link: '/statistics',
     },
     {
-      title: 'PROFILE',
+      title: 'PROFIL',
       children: [
         {
-          title: 'Your Profile',
+          title: 'Mój profil',
           link: '/profile',
         },
         {
-          title: 'Login',
+          title: 'Logowanie',
           link: '/login',
         },
         {
-          title: 'Register',
+          title: 'Rejestracja',
           link: '/register',
         },
         {
-          title: 'Logout',
+          title: 'Wyloguj',
         },
       ],
     },

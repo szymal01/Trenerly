@@ -1,0 +1,56 @@
+<div class="home_menu">
+  <nb-card class="home_menu">
+    <nb-card-header> <h1>Strona Główna</h1> </nb-card-header>
+    <nb-card-body>
+      <div class="container">
+        <div id="home-calendar" class="home-container">
+          <a href="/calendar"><h1>Kalendarz</h1></a>
+          <input
+            nbInput
+            placeholder="Pick Date Range"
+            [nbDatepicker]="formpicker"
+          />
+          <nb-rangepicker #formpicker></nb-rangepicker>
+          <nb-accordion class="accordion-with-scroll">
+            <nb-accordion-item *ngFor="let event of events">
+              <nb-accordion-item-header
+                ><h3>{{ event.title }}</h3>
+                <p>
+                  {{ event.start_date | date : "shortDate" }}
+                </p></nb-accordion-item-header
+              >
+              <nb-accordion-item-body
+                ><p>{{ event.location_name }}</p></nb-accordion-item-body
+              >
+            </nb-accordion-item>
+          </nb-accordion>
+        </div>
+        <div id="home-teams" class="home-container">
+          <h1>Drużyny</h1>
+          <a href="/teams"
+            ><img src="../../assets/group-chat.png" width="250px;"
+          /></a>
+          <div id="teams-h4">
+            <h4>Drużyny: 0</h4>
+            <h4>Zawodnicy: 0</h4>
+          </div>
+        </div>
+        <div class="home-container">
+          <h1>Statystyki</h1>
+          <a href="/statistics"
+            ><img src="../../assets/chart.png" width="200px;"
+          /></a>
+        </div>
+        <div class="home-container">
+          <h1>Wiadomości</h1>
+          <a href="/messages"
+            ><img src="../../assets/comment.png" width="200px;"
+          /></a>
+        </div>
+        <div class="home-container">
+          <h1>Informacje</h1>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

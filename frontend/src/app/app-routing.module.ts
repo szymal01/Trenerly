@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component'; // Importuj komponenty podstron
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { TeamsComponent } from './teams/teams.component';
-import { MessagesComponent } from './messages/messages.component';
-import { ProfileComponent } from './profile/profile.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { StatuteComponent } from './statute/statute.component';
+import { HomeComponent } from './component/home/home.component'; // Importuj komponenty podstron
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { CalendarComponent } from './component/calendar/calendar.component';
+import { TeamsComponent } from './component/teams/teams.component';
+import { MessagesComponent } from './component/messages/messages.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { StatisticsComponent } from './component/statistics/statistics.component';
+import { StatuteComponent } from './component/statute/statute.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent }, // Strona główna

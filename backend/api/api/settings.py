@@ -32,8 +32,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'events.apps.EventsConfig',
-    'user.apps.UserConfig',
+    "events",
+    "user",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    "corsheaders",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,4 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+AUTH_USER_MODEL = 'user.User'

@@ -1,4 +1,4 @@
-from .models import User, Role, Player_statistics, Team
+from .models import User, Role, Team
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,11 +10,6 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = ['name']
-        
-class PlayerStatsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Player_statistics
-        fields = ['user','stats']
         
 
 class CoachSerializer(serializers.ModelSerializer):

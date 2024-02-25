@@ -10,7 +10,7 @@ export class EventService {
 
   constructor(private http: HttpClient) {}
 
-  getEventsList() {
-    return this.http.get(this.apiUrl + 'event');
+  getEventsList(params?: any) {
+    return this.http.get(this.apiUrl + 'event', { params: params });
   }
 }

@@ -68,7 +68,27 @@ nb-layout {
   font-family: "myfont", sans-serif;
 }
 
-nb-menu menu-item a {
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "myfont", sans-serif;
+}
+
+h2 {
+  font-family: "myfont", sans-serif;
+}
+
+h3 {
+  font-family: "myfont", sans-serif;
+}
+
+h4 {
+  font-family: "myfont", sans-serif;
+}
+
+h5 {
   font-family: "myfont", sans-serif;
 }
 
@@ -83,4 +103,12 @@ nb-layout-column {
   background-attachment: fixed;
   background-size: cover;
   font-family: "myfont", sans-serif;
+}
+
+nb-menu {
+  text-align: center;
+}
+
+.logo {
+  text-align: center;
 }

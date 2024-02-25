@@ -61,7 +61,15 @@
 </nb-layout> -->
 
 <nb-layout>
-  <nb-sidebar><nb-menu [items]="items"></nb-menu></nb-sidebar>
+  <nb-sidebar
+    ><div class="logo">
+      <h1>TRENERLY</h1>
+      <a href="/home/home"
+        ><img src="../../assets/logoT.png" width="150px;"
+      /></a>
+    </div>
+    <nb-menu [items]="items" class="custom-nb-menu"></nb-menu
+  ></nb-sidebar>
   <nb-layout-column class="colored-column-success"
     ><router-outlet></router-outlet
   ></nb-layout-column>

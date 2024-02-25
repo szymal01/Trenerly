@@ -1,0 +1,78 @@
+<!-- <form>
+  <div class="logo"><img src="../../assets/logoT.png" /></div>
+
+  <h1>Rejestracja</h1>
+
+  <nb-checkbox (checkedChange)="toggle($event)"
+    ><p>Konto Trenera</p></nb-checkbox
+  >
+
+  <label for="emial">Podaj Adres Email:</label>
+  <input type="email" placeholder="Email" id="email" />
+
+  <label for="password">Podaj Hasło:</label>
+  <input type="password" placeholder="Hasło" id="password" />
+
+  <label for="confirmPassword">Potwierdź hasło:</label>
+  <input type="password" placeholder="Hasło" id="password" />
+
+  <button>Zarejestruj</button>
+  <div class="register-p">
+    <p>Masz już konto? <a href="/login">Zaloguj się tutaj!</a></p>
+  </div>
+</form> -->
+
+<nb-stepper #stepper [linear]="linearMode">
+  <nb-step label="Typ konta">
+    <form class="step-container">
+      <div class="logo"><img src="../../assets/logoT.png" /></div>
+      <h1>Konto Trenera</h1>
+      <h1>Konto Zawodnika</h1>
+      <button nbStepperNext>Dalej</button>
+      <div class="register-p">
+        <p>Masz już konto? <a href="/login">Zaloguj się tutaj!</a></p>
+      </div>
+    </form>
+  </nb-step>
+
+  <nb-step label="Movie">
+    <form class="step-container">
+      <div class="input-group">
+        <div class="logo"><img src="../../assets/logoT.png" /></div>
+        <label for="emial">Podaj Adres Email:</label>
+        <input type="email" placeholder="Email" id="email" />
+
+        <label for="password">Podaj Hasło:</label>
+        <input type="password" placeholder="Hasło" id="password" />
+
+        <label for="confirmPassword">Potwierdź hasło:</label>
+        <input type="password" placeholder="Hasło" id="password" />
+      </div>
+      <button nbButton nbStepperNext>next</button>
+    </form>
+  </nb-step>
+
+  <nb-step label="Something">
+    <form class="step-container">
+      <div class="input-group">
+        <input
+          type="text"
+          placeholder="Enter something"
+          class="form-control"
+          name="something"
+          required
+          nbInput
+          ngModel
+        />
+      </div>
+      <button nbButton nbStepperNext>next</button>
+    </form>
+  </nb-step>
+
+  <nb-step [hidden]="true">
+    <div class="step-container">
+      <h3>Wizard completed!</h3>
+      <button nbButton (click)="stepper.reset()">Try again</button>
+    </div>
+  </nb-step>
+</nb-stepper>

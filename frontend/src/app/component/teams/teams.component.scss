@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "myfont";
+  src: url("../../assets/fonts/built_titling_bd.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+nb-layout {
+  font-family: "myfont", sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  min-width: 800px;
+  min-height: 380px;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 50px;
+  flex: 1;
+  padding-bottom: 20px;
+  display: block;
+}
+
+.team-card:hover {
+  transform: scale(1.1, 1.1);
+  transition-duration: 1s;
+}
+
+img {
+  margin: 30px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50px;
+  object-fit: cover;
+  float: left;
+  //   background-color: #ff0000;
+  //   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' %3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(46,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%23C30303'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpattern id='b' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23FF0000' cx='20' cy='20' r='20'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.12'/%3E%3C/svg%3E");
+  //   background-attachment: fixed;
+  background-color: #ff0000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23FF0000' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23f20008' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23e4000f' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23d70012' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23c90015' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23bb0017' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23ae0018' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23a00018' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23930018' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23850018' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23780017' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%236b0216' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%235e0414' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23510612' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%2345060f' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%2339070b' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%232d0606' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23240000' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "myfont", sans-serif;
+}
+
+h2 {
+  font-family: "myfont", sans-serif;
+}
+
+h3 {
+  font-family: "myfont", sans-serif;
+}
+
+h4 {
+  font-family: "myfont", sans-serif;
+}
+
+h5 {
+  font-family: "myfont", sans-serif;
+}
+
+#title-teams {
+  color: white;
+  font-size: 70px;
+}

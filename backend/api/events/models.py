@@ -1,5 +1,7 @@
 from django.db import models
-from user.models import Team
+from user.models import Team, User
+from django.utils.functional import cached_property
+
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
@@ -17,7 +19,7 @@ class Event(models.Model):
     start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     end_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.PROTECT)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     
     def __str__(self):
@@ -36,5 +38,34 @@ class Training(models.Model):
     
 class Match(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    opponent = models.ForeignKey(Opponent, on_delete=models.PROTECT)
+
+class PlayerMatchStatistics(models.Model):
     
+    player = models.ForeignKey(User, on_delete=models.PROTECT)
+    match = models.ForeignKey(Event, on_delete=models.CASCADE)
     
+    points = models.IntegerField()
+    
+    service_sum = models.IntegerField()
+    ace = models.IntegerField()
+    service_errors = models.IntegerField()
+    
+    receive_sum = models.IntegerField()
+    receive_errors = models.IntegerField()
+    receive_negative = models.IntegerField()
+    receive_positive = models.IntegerField()
+    receive_perfect = models.IntegerField()
+    @cached_property
+    def perfect_procent(self):
+        return self.receive_perfect*100/self.receive_sum
+    
+    spikes = models.IntegerField()
+    spike_errors = models.IntegerField()
+    spikes_blocked = models.IntegerField()
+    spike_points = models.IntegerField()
+    @cached_property
+    def spike_procent(self):
+        return self.spike_points*100/self.spikes
+    
+    blocks = models.IntegerField()

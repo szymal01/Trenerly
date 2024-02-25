@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module'; // Importuj AppRoutingModule
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -18,20 +18,30 @@ import {
   NbDatepickerModule,
   NbInputModule,
   NbAccordionModule,
+  NbSearchModule,
+  NbChatModule,
+  NbRadioModule,
+  NbCheckboxModule,
+  NbStepperModule,
 } from '@nebular/theme';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { TeamsComponent } from './teams/teams.component';
-import { MessagesComponent } from './messages/messages.component';
-import { ProfileComponent } from './profile/profile.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { StatuteComponent } from './statute/statute.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { HomeComponent } from './component/home/home.component';
+import { CalendarComponent } from './component/calendar/calendar.component';
+import { TeamsComponent } from './component/teams/teams.component';
+import { MessagesComponent } from './component/messages/messages.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { StatisticsComponent } from './component/statistics/statistics.component';
+import { StatuteComponent } from './component/statute/statute.component';
 import { LocationService } from './services/location/location.service';
 import { EventService } from './services/event/event.service';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [
@@ -65,8 +75,18 @@ import { EventService } from './services/event/event.service';
     NbInputModule,
     NbAccordionModule,
     BrowserAnimationsModule,
+    NbSearchModule,
+    NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
+    NbRadioModule,
+    NbCheckboxModule,
+    NbStepperModule,
+    NbSidebarModule,
   ],
-  providers: [LocationService, EventService],
+  providers: [
+    LocationService,
+    EventService,
+    { provide: LOCALE_ID, useValue: 'pl' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
