@@ -1,10 +1,14 @@
 from django.shortcuts import render
-from .models import Event, Opponent, Match, Training, Location
+
+from user.models import Team
+from .models import Event, Location
 from rest_framework import permissions, viewsets
-from .serializer import LocationSerializer, EventSerializer, OpponentSerializer, MatchSerializer, TrainingSerializer
+from .serializer import LocationSerializer, EventSerializer
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from rest_framework.permissions import IsAuthenticated
+
 
 class LocationViewSet(viewsets.ModelViewSet):
 
@@ -12,36 +16,21 @@ class LocationViewSet(viewsets.ModelViewSet):
     serializer_class = LocationSerializer
 
 class EventViewSet(viewsets.ModelViewSet):
-    
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    def get_queryset(self):
+        return Event.objects.filter(team__in= self.request.user.team.all())
+    def list(self,request):
+        queryset = self.get_queryset().filter(Q(start_date__gte=request.query_params['start_date'])&Q(end_date__lte=self.request.query_params['end_date']))
+         #queryset = Event.objects.filter(Q(start_date__gte=self.request.query_params.start_date)&Q(end_date__lte=self.request.query_params.end_date))
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)
     # def get_queryset(self):
     #     queryset = Event.objects.filter(Q(start_date__gte=self.request.start_date)&Q(end_date__lte=self.request.end_date))
     #     return queryset
     # serializer_class = EventSerializer
-    # def list(self,request):
-    #     queryset = Event.objects.all()
-    #      #queryset = Event.objects.filter(Q(start_date__gte=self.request.query_params.start_date)&Q(end_date__lte=self.request.query_params.end_date))
-    #     serializer = EventSerializer(queryset)
-    #     return Response(serializer.data)
     # def retrieve(self, request, uuid=None):
     #     queryset = Event.objects.all()
-    #     #queryset = Event.objects.filter(Q(start_date__gte=self.request.query_params.start_date)&Q(end_date__lte=self.request.query_params.end_date))
+    #     queryset = Event.objects.filter(Q(start_date__gte=self.request.query_params.start_date)&Q(end_date__lte=self.request.query_params.end_date))
     #     event = get_object_or_404(queryset, uuid=uuid) 
     #     serializer = EventSerializer(event)
     #     return Response(serializer.data)
 
-class MatchViewSet(viewsets.ModelViewSet):
-
-    queryset = Match.objects.all()
-    serializer_class = MatchSerializer
-    
-class TrainingViewSet(viewsets.ModelViewSet):
-
-    queryset = Training.objects.all()
-    serializer_class = TrainingSerializer
-    
-class OpponentViewSet(viewsets.ModelViewSet):
-
-    queryset = Opponent.objects.all()
-    serializer_class = OpponentSerializer

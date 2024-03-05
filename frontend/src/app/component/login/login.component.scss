@@ -1,6 +1,6 @@
 @font-face {
   font-family: "myfont";
-  src: url("../../assets/fonts/built_titling_bd.otf") format("opentype");
+  src: url("../../../assets/fonts/built_titling_bd.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -89,12 +89,12 @@ form h1 {
   font-weight: 500;
   line-height: 42px;
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 label {
   display: block;
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 25px;
   font-weight: 500;
 }
@@ -113,7 +113,7 @@ input {
   color: #e5e5e5;
 }
 button {
-  margin-top: 50px;
+  margin-top: 20px;
   width: 100%;
   background-color: black;
   color: #080710;
@@ -135,4 +135,8 @@ img {
 p {
   padding: 20px;
   font-size: 18px;
+}
+
+.another-action {
+  padding-top: 20px;
 }

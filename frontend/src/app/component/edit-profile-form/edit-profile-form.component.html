@@ -1,0 +1,256 @@
+<nb-card>
+  <nb-card-header><h1>Edytuj dane</h1></nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="updateUser()" #form="ngForm" aria-labelledby="title">
+      <div class="main">
+        <div class="column">
+          <div class="form-control-group">
+            <label for="input-username">Nazwa użytkownika:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.username"
+              #username="ngModel"
+              id="input-username"
+              name="username"
+              placeholder="Nazwa użytkownika"
+              fullWidth
+              fieldSize="large"
+              [status]="
+                username.dirty
+                  ? username.invalid
+                    ? 'danger'
+                    : 'success'
+                  : 'basic'
+              "
+              [required]="true"
+              [attr.aria-invalid]="
+                username.invalid && username.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="username.invalid && username.touched">
+              <p *ngIf="username.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+
+          <div class="form-control-group">
+            <label for="input-first_name">Imie:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.first_name"
+              #first_name="ngModel"
+              id="input-first_name"
+              name="first_name"
+              placeholder="Imię"
+              fullWidth
+              fieldSize="large"
+              [status]="
+                first_name.dirty
+                  ? first_name.invalid
+                    ? 'danger'
+                    : 'success'
+                  : 'basic'
+              "
+              [required]="true"
+              [attr.aria-invalid]="
+                first_name.invalid && first_name.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="first_name.invalid && first_name.touched">
+              <p *ngIf="first_name.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+
+          <div class="form-control-group">
+            <label for="input-last_name">Nazwisko:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.last_name"
+              #last_name="ngModel"
+              id="input-last_name"
+              name="last_name"
+              placeholder="Nazwisko"
+              fullWidth
+              fieldSize="large"
+              [status]="
+                last_name.dirty
+                  ? last_name.invalid
+                    ? 'danger'
+                    : 'success'
+                  : 'basic'
+              "
+              [required]="true"
+              [attr.aria-invalid]="
+                last_name.invalid && last_name.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="last_name.invalid && last_name.touched">
+              <p *ngIf="last_name.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+
+          <div class="form-control-group">
+            <label for="input-phone_number">Numer telefonu:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.phone_number"
+              #phone_number="ngModel"
+              type="phone_number"
+              id="input-phone_number"
+              name="phone_number"
+              placeholder="Numer telefonu"
+              fullWidth
+              fieldSize="large"
+              [status]="
+                phone_number.dirty
+                  ? phone_number.invalid
+                    ? 'danger'
+                    : 'success'
+                  : 'basic'
+              "
+              [required]="true"
+              [minlength]="9"
+              [maxlength]="9"
+              [attr.aria-invalid]="
+                phone_number.invalid && phone_number.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="phone_number.invalid && phone_number.touched">
+              <p *ngIf="phone_number.errors?.required">
+                To pole jest wymagane!
+              </p>
+              <p
+                *ngIf="
+                  phone_number.errors?.minlength ||
+                  phone_number.errors?.maxlength
+                "
+              >
+                Numer telefonu powinien mieć 9 znaków
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-control-group">
+            <label for="input-password">Hasło:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.password"
+              #password="ngModel"
+              type="password"
+              id="input-password"
+              name="password"
+              placeholder="Hasło"
+              fullWidth
+              fieldSize="large"
+              [status]="
+                password.dirty
+                  ? password.invalid
+                    ? 'danger'
+                    : 'success'
+                  : 'basic'
+              "
+              [minlength]="
+                getConfigValue('forms.validation.password.minLength')
+              "
+              [maxlength]="
+                getConfigValue('forms.validation.password.maxLength')
+              "
+            />
+            <ng-container *ngIf="password.invalid && password.touched">
+              <p
+                *ngIf="password.errors?.minlength || password.errors?.maxlength"
+              >
+                Hasło powinno mieć od
+                {{ getConfigValue("forms.validation.password.minLength") }} do
+                {{ getConfigValue("forms.validation.password.maxLength") }}
+                znaków
+              </p>
+            </ng-container>
+          </div>
+
+          <div class="form-control-group">
+            <label for="input-re-password">Potwierdź hasło:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.rePass"
+              #rePass="ngModel"
+              type="password"
+              id="input-re-password"
+              name="rePass"
+              placeholder="Potwierdź hasło"
+              fullWidth
+              fieldSize="large"
+              [status]="
+                rePass.dirty
+                  ? rePass.invalid || password.value != rePass.value
+                    ? 'danger'
+                    : 'success'
+                  : 'basic'
+              "
+              [attr.aria-invalid]="
+                rePass.invalid && rePass.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="rePass.touched">
+              <p *ngIf="rePass.invalid && rePass.errors?.required">
+                To pole jest wymagane!
+              </p>
+              <p
+                *ngIf="
+                  password.value != rePass.value && !rePass.errors?.required
+                "
+              >
+                Hasła nie są zgodne.
+              </p>
+            </ng-container>
+          </div>
+          <div class="form-control-group">
+            <label for="input-birht_details">Data urodzenia:</label>
+            <input
+              nbInput
+              [(ngModel)]="user.birht_details"
+              #birht_details="ngModel"
+              type="text"
+              id="input-birht_details"
+              name="birht_details"
+              placeholder="Data"
+              fullWidth
+              fieldSize="large"
+              [attr.aria-invalid]="
+                birht_details.invalid && birht_details.touched ? true : null
+              "
+            />
+          </div>
+
+          <div class="form-control-group">
+            <label for="input-medical_tests_deadline"
+              >Data ważności badań:</label
+            >
+            <input
+              nbInput
+              [(ngModel)]="user.medical_tests_deadline"
+              #medical_tests_deadline="ngModel"
+              type="text"
+              id="input-medical_tests_deadline"
+              name="medical_tests_deadline"
+              placeholder="Data"
+              fullWidth
+              fieldSize="large"
+              [attr.aria-invalid]="
+                medical_tests_deadline.invalid && medical_tests_deadline.touched
+                  ? true
+                  : null
+              "
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        [disabled]="submitted || !form.valid"
+        [class.btn-pulse]="submitted"
+      >
+        Zapisz
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>

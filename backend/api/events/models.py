@@ -11,9 +11,15 @@ class Location(models.Model):
     
     def __str__(self):
         return self.name
+    
+class EventType(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50)
+    
+    
 
 class Event(models.Model):
-    type = models.CharField(max_length=50)
+    type = models.ForeignKey(EventType, on_delete=models.PROTECT)
     title = models.CharField(max_length=250)
     start_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     start_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
@@ -21,24 +27,11 @@ class Event(models.Model):
     end_time = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.PROTECT)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    exercises = models.TextField(null=True, blank=True)
     
     def __str__(self):
         return self.title
     
-class Opponent(models.Model):
-    name = models.CharField(max_length=50)
-    
-    def __str__(self):
-        return self.name
-
-class Training(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    exercises = models.TextField()
-    
-    
-class Match(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    opponent = models.ForeignKey(Opponent, on_delete=models.PROTECT)
 
 class PlayerMatchStatistics(models.Model):
     
@@ -69,3 +62,14 @@ class PlayerMatchStatistics(models.Model):
         return self.spike_points*100/self.spikes
     
     blocks = models.IntegerField()
+    
+class Attendance(models.Model):
+    player = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    attendance = models.BooleanField()
+    
+class Indisposition(models.Model):
+    player = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    end_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    reason = models.CharField(max_length=254)

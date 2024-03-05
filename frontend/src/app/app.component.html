@@ -61,15 +61,14 @@
 </nb-layout> -->
 
 <nb-layout>
-  <nb-sidebar
+  <nb-sidebar *ngIf="is_auth"
     ><div class="logo">
       <h1>TRENERLY</h1>
-      <a href="/home/home"
-        ><img src="../../assets/logoT.png" width="150px;"
-      /></a>
+      <a href="/home"><img src="../../assets/logoT.png" width="150px;" /></a>
     </div>
     <nb-menu [items]="items" class="custom-nb-menu"></nb-menu
-  ></nb-sidebar>
+    ><button (click)="logout()">WYLOGUJ</button></nb-sidebar
+  >
   <nb-layout-column class="colored-column-success"
     ><router-outlet></router-outlet
   ></nb-layout-column>

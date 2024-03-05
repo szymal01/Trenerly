@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "myfont";
+  src: url("../../../assets/fonts/built_titling_bd.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+.home_menu {
+  height: 98%;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "myfont", sans-serif;
+  font-size: 40px;
+}
+
+h2 {
+  font-family: "myfont", sans-serif;
+}
+
+h3 {
+  font-family: "myfont", sans-serif;
+}
+
+h4 {
+  font-family: "myfont", sans-serif;
+  color: white;
+}
+
+h5 {
+  font-family: "myfont", sans-serif;
+}
+
+nb-card-header {
+  //background: rgb(2, 0, 36);
+  // background: linear-gradient(
+  //   90deg,
+  //    rgb(19, 17, 58) 0%,
+  //   rgba(199, 25, 25, 1) 100%
+  // );
+  //background: linear-gradient(90deg, black, rgba(199, 25, 25, 1) 100%);
+  background-color: #ff0000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23FF0000' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23f20008' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23e4000f' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23d70012' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23c90015' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23bb0017' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23ae0018' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23a00018' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23930018' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23850018' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23780017' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%236b0216' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%235e0414' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23510612' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%2345060f' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%2339070b' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%232d0606' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23240000' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  border: none;
+  border-radius: 0;
+}
+
+nb-card {
+  border: none;
+}
+
+nb-card-header h1 {
+  color: white;
+}
+
+nb-layout {
+  font-family: "myfont", sans-serif;
+}
+
+form {
+  margin: auto;
+  min-height: 500px;
+  min-width: 500px;
+}
+
+form * {
+  font-family: "myfont", sans-serif;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+form h1 {
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 500;
+}
+input {
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: ghostwhite;
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+}
+button {
+  margin-top: 50px;
+  width: 200px;
+  height: 70px;
+  background-color: black;
+  color: white;
+  padding: 15px 0;
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+.add-container {
+  margin: 5px;
+  margin-bottom: 40px;
+}
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}

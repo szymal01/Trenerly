@@ -1,6 +1,6 @@
 @font-face {
   font-family: "myfont";
-  src: url("../../assets/fonts/built_titling_bd.otf") format("opentype");
+  src: url("../../../assets/fonts/built_titling_bd.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -23,6 +23,10 @@ h2 {
 
 h3 {
   font-family: "myfont", sans-serif;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 h4 {
@@ -140,7 +144,7 @@ nb-card-header h1 {
 }
 
 .accordion-with-scroll {
-  max-height: 400px;
+  max-height: 90%;
   overflow: hidden scroll;
   margin-right: -5px;
 }
@@ -151,4 +155,20 @@ nb-layout {
 
 nb-accordion {
   margin-top: 20px;
+}
+
+button {
+  background-color: black;
+  font-family: "myfont", sans-serif;
+  color: white;
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.range {
+  margin-top: 20px;
+  width: 100%;
 }

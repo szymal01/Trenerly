@@ -1,27 +1,76 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Dictionary } from '@fullcalendar/core/internal';
+import {
+  NB_AUTH_OPTIONS,
+  NbAuthResult,
+  NbAuthService,
+  NbAuthSocialLink,
+  NbLoginComponent,
+  getDeepFromObject,
+} from '@nebular/auth';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+  ngOnInit(): void {
+    this.strategy = 'email';
+  }
+  redirectDelay: number = 0;
+  showMessages: any = {};
+  strategy: string = '';
 
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+  errors: string[] = [];
+  messages: string[] = [];
+  user: any = {};
+  submitted: boolean = false;
+  socialLinks: NbAuthSocialLink[] = [];
+  rememberMe = false;
+
+  constructor(
+    protected service: NbAuthService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected cd: ChangeDetectorRef,
+    protected router: Router
+  ) {
+    this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
+    this.showMessages = this.getConfigValue('forms.login.showMessages');
+    this.strategy = this.getConfigValue('forms.login.strategy');
+    this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+    this.rememberMe = this.getConfigValue('forms.login.rememberMe');
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      // Tutaj możesz dodać logikę logowania
-      console.log('Dane logowania:', this.loginForm.value);
-      // Przykład: Przekieruj do innej strony po poprawnym zalogowaniu
-      // this.router.navigate(['/dashboard']);
-    }
+  login(): void {
+    this.errors = [];
+    this.messages = [];
+    this.submitted = true;
+
+    this.service
+      .authenticate(this.strategy, this.user)
+      .subscribe((result: NbAuthResult) => {
+        this.submitted = false;
+
+        if (result.isSuccess()) {
+          this.messages = result.getMessages();
+        } else {
+          this.errors = result.getErrors();
+        }
+
+        const redirect = result.getRedirect();
+        if (redirect) {
+          setTimeout(() => {
+            return this.router.navigateByUrl(redirect);
+          }, this.redirectDelay);
+        }
+        this.cd.detectChanges();
+      });
+  }
+
+  getConfigValue(key: string): any {
+    return getDeepFromObject(this.options, key, null);
   }
 }

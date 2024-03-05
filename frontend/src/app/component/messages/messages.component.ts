@@ -40,7 +40,7 @@ export class MessagesComponent implements OnInit {
   ngOnInit(): void {
     this.locationService.getLocationsList().subscribe((data: any) => {
       this.locations = data.results;
-      console.log(this.locations);
+      // console.log(this.locations);
     });
   }
 }

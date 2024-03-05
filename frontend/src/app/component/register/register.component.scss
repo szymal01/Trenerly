@@ -71,6 +71,7 @@ label {
   margin-top: 30px;
   font-size: 25px;
   font-weight: 500;
+  margin-right: 20px;
 }
 input {
   display: block;
@@ -111,5 +112,10 @@ p {
   font-size: 18px;
 }
 
-nb-stepper {
+.register-center {
+  text-align: center;
+}
+
+button:disabled {
+  color: gray;
 }

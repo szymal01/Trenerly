@@ -28,32 +28,34 @@
 <nb-card class="home_menu">
   <nb-card-header>
     <h1>Kalendarz</h1>
-    <button nbButton class="add_button">Dodaj</button>
+    <button class="add_button" (click)="addEvent()">Dodaj wydarzenie</button>
   </nb-card-header>
   <nb-card-body>
     <div class="container">
-      <div class="input-center">
-        <input
-          nbInput
-          placeholder="Pick Date"
-          [nbDatepicker]="dateTimePicker"
-        />
-        <nb-datepicker #dateTimePicker></nb-datepicker>
+      <div>
+        <nb-calendar-range
+          [(range)]="range"
+          (rangeChange)="getRangeDate($event)"
+        ></nb-calendar-range>
       </div>
       <div id="home-calendar" class="home-container">
-        <nb-accordion class="accordion-with-scroll">
-          <nb-accordion-item *ngFor="let event of events">
-            <nb-accordion-item-header
-              ><h3>{{ event.title }}</h3>
-              <p>
-                {{ event.start_date | date : "shortDate" }}
-              </p></nb-accordion-item-header
-            >
-            <nb-accordion-item-body
-              ><p>{{ event.location_name }}</p></nb-accordion-item-body
-            >
-          </nb-accordion-item>
-        </nb-accordion>
+        <div class="calendar-container">
+          <div class="range">
+            <nb-accordion class="accordion-with-scroll">
+              <nb-accordion-item *ngFor="let event of events">
+                <nb-accordion-item-header
+                  ><h3>{{ event.title }}</h3>
+                  <p>
+                    {{ event.start_date | date : "shortDate" }}
+                  </p></nb-accordion-item-header
+                >
+                <nb-accordion-item-body
+                  ><p>{{ event.location_name }}</p></nb-accordion-item-body
+                >
+              </nb-accordion-item>
+            </nb-accordion>
+          </div>
+        </div>
       </div>
     </div></nb-card-body
   >

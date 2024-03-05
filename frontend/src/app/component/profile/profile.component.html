@@ -4,7 +4,39 @@
   </nb-card-header>
   <nb-card-body>
     <img src="../../assets/logo.png" />
-    <h1>Imie Nazwisko</h1>
-    <h3>Drużyna</h3>
+    <p class="name">{{ user?.first_name }}</p>
+
+    <p class="name">{{ user?.last_name }}</p>
+    <div class="main">
+      <div class="column">
+        <p class="role">{{ user.role }}</p>
+        <p *ngif="!user.role" class="role">Nie masz jeszcze przypisanej roli</p>
+        <h4>Nazwa użytkownika:</h4>
+        <p class="email">{{ user.username }}</p>
+        <h4>Adres E-mail:</h4>
+        <p class="email">{{ user.email }}</p>
+        <h4>Numer telefonu:</h4>
+        <p class="number">{{ user.phone_number }}</p>
+      </div>
+      <div class="column">
+        <h5>Data urodzenia:</h5>
+        <p>{{ user.birth_details }}</p>
+        <h5>Badania ważne do:</h5>
+        <p>{{ user.medical_tests_deadline }}</p>
+      </div>
+      <div class="column">
+        <h4>Drużyny:</h4>
+        <ul *ngFor="let team of teams">
+          <li class="team">
+            <p class="team">{{ team.name }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nb-card-body>
+  <nb-card-footer
+    ><div class="buttons">
+      <button (click)="updateUser()">Edytuj</button> <button>Statystyki</button>
+    </div></nb-card-footer
+  >
 </nb-card>

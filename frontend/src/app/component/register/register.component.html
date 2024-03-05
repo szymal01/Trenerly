@@ -22,7 +22,7 @@
   </div>
 </form> -->
 
-<nb-stepper #stepper [linear]="linearMode">
+<!-- <nb-stepper #stepper [linear]="linearMode">
   <nb-step label="Typ konta">
     <form class="step-container">
       <div class="logo"><img src="../../assets/logoT.png" /></div>
@@ -75,4 +75,407 @@
       <button nbButton (click)="stepper.reset()">Try again</button>
     </div>
   </nb-step>
-</nb-stepper>
+</nb-stepper> -->
+
+<!-- <form [formGroup]="registrationForm" (ngSubmit)="submitRegistration()">
+  <div class="logo"><img src="../../assets/logoT.png" /></div>
+
+  <h1>Rejestracja</h1>
+  <div>
+    <label for="username">Nazwa użytkownika:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="text"
+      id="username"
+      formControlName="username"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('username')?.errors?.required &&
+        registrationForm.get('username')?.touched
+      "
+    >
+      To pole jest wymagane!
+    </div>
+  </div>
+
+  <div>
+    <label for="first_name">Imie:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="text"
+      id="first_name"
+      formControlName="first_name"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('first_name')?.errors?.required &&
+        registrationForm.get('first_name')?.touched
+      "
+    >
+      To pole jest wymagane!
+    </div>
+  </div>
+
+  <div>
+    <label for="last_name">Nazwisko:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="text"
+      id="last_name"
+      formControlName="last_name"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('last_name')?.errors?.required &&
+        registrationForm.get('last_name')?.touched
+      "
+    >
+      To pole jest wymagane!
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Adres E-mail:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="email"
+      id="email"
+      formControlName="email"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('email')?.errors?.required &&
+        registrationForm.get('email')?.touched
+      "
+    >
+      To pole jest wymagane!
+    </div>
+    <div
+      *ngIf="
+        registrationForm.get('email')?.errors?.email &&
+        registrationForm.get('email')?.touched
+      "
+    >
+      Wprowadź prawidłowy adres e-mail!
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Hasło:</label>
+    <input
+      nbInput
+      fullWidth
+      [(ngModel)]="registrationForm.value.password"
+      #password="ngModel"
+      name="password"
+      type="password"
+      id="input-password"
+      placeholder="Hasło"
+      fieldSize="large"
+      [status]="
+        password.dirty ? (password.invalid ? 'danger' : 'success') : 'basic'
+      "
+      [required]="getConfigValue('forms.validation.password.required')"
+      [minlength]="getConfigValue('forms.validation.password.minLength')"
+      [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+      [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+    />
+    <ng-container *ngIf="password.invalid && password.touched">
+      <p class="danger" *ngIf="password.errors?.required">
+        Hasło jest wymagane!
+      </p>
+      <p
+        class="danger"
+        *ngIf="password.errors?.minlength || password.errors?.maxlength"
+      >
+        Hasło powinno zawierać od
+        {{ getConfigValue("forms.validation.password.minLength") }} do
+        {{ getConfigValue("forms.validation.password.maxLength") }}
+        znaków
+      </p>
+    </ng-container>
+  </div>
+
+  <div>
+    <label for="phone_number">Numer telefonu:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="text"
+      id="phone_number"
+      formControlName="phone_number"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('phone_number')?.errors?.required &&
+        registrationForm.get('phone_number')?.touched
+      "
+    >
+      To pole jest wymagane!
+    </div>
+  </div>
+
+  <div>
+    <label for="birth_details">Data urodzenia:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="date"
+      id="birth_details"
+      formControlName="birth_details"
+    />
+  </div>
+
+  <div>
+    <label for="medical_tests_deadline">Termin badań lekarskich:</label>
+    <input
+      nbInput
+      fieldSize="large"
+      type="date"
+      id="medical_tests_deadline"
+      formControlName="medical_tests_deadline"
+    />
+  </div>
+
+  <button type="submit" [disabled]="registrationForm.invalid">
+    Stwórz konto
+  </button>
+  <div class="register-p">
+    <p>Masz już konto? <a href="/login">Zaloguj się tutaj!</a></p>
+  </div>
+</form> -->
+
+<nb-alert
+  *ngIf="showMessages.error && errors?.length && !submitted"
+  outline="danger"
+  role="alert"
+>
+  <p class="alert-title"><b>Coś poszło nie tak!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert
+  *ngIf="showMessages.success && messages?.length && !submitted"
+  outline="success"
+  role="alert"
+>
+  <p class="alert-title"><b>Rejestracja przebiegła pomyślnie!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">
+      {{ message }}
+    </li>
+  </ul>
+</nb-alert>
+
+<form (ngSubmit)="register()" #form="ngForm" aria-labelledby="title">
+  <div class="logo"><img src="../../assets/logoT.png" /></div>
+  <h1>Rejestracja</h1>
+  <div class="form-control-group">
+    <label for="input-username">Nazwa użytkownika:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.username"
+      #username="ngModel"
+      id="input-username"
+      name="username"
+      placeholder="Nazwa użytkownika"
+      fullWidth
+      fieldSize="large"
+      [status]="
+        username.dirty ? (username.invalid ? 'danger' : 'success') : 'basic'
+      "
+      [required]="true"
+      [attr.aria-invalid]="username.invalid && username.touched ? true : null"
+    />
+    <ng-container *ngIf="username.invalid && username.touched">
+      <p *ngIf="username.errors?.required">To pole jest wymagane!</p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-first_name">Imie:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.first_name"
+      #first_name="ngModel"
+      id="input-first_name"
+      name="first_name"
+      placeholder="Imię"
+      fullWidth
+      fieldSize="large"
+      [status]="
+        first_name.dirty ? (first_name.invalid ? 'danger' : 'success') : 'basic'
+      "
+      [required]="true"
+      [attr.aria-invalid]="
+        first_name.invalid && first_name.touched ? true : null
+      "
+    />
+    <ng-container *ngIf="first_name.invalid && first_name.touched">
+      <p *ngIf="first_name.errors?.required">To pole jest wymagane!</p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-last_name">Nazwisko:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.last_name"
+      #last_name="ngModel"
+      id="input-last_name"
+      name="last_name"
+      placeholder="Nazwisko"
+      fullWidth
+      fieldSize="large"
+      [status]="
+        last_name.dirty ? (last_name.invalid ? 'danger' : 'success') : 'basic'
+      "
+      [required]="true"
+      [attr.aria-invalid]="last_name.invalid && last_name.touched ? true : null"
+    />
+    <ng-container *ngIf="last_name.invalid && last_name.touched">
+      <p *ngIf="last_name.errors?.required">To pole jest wymagane!</p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-phone_number">Numer telefonu:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.phone_number"
+      #phone_number="ngModel"
+      type="phone_number"
+      id="input-phone_number"
+      name="phone_number"
+      placeholder="Numer telefonu"
+      fullWidth
+      fieldSize="large"
+      [status]="
+        phone_number.dirty
+          ? phone_number.invalid
+            ? 'danger'
+            : 'success'
+          : 'basic'
+      "
+      [required]="true"
+      [minlength]="9"
+      [maxlength]="9"
+      [attr.aria-invalid]="
+        phone_number.invalid && phone_number.touched ? true : null
+      "
+    />
+    <ng-container *ngIf="phone_number.invalid && phone_number.touched">
+      <p *ngIf="phone_number.errors?.required">To pole jest wymagane!</p>
+      <p
+        *ngIf="phone_number.errors?.minlength || phone_number.errors?.maxlength"
+      >
+        Numer telefonu powinien mieć 9 znaków
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-email">Adres e-mail:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.email"
+      #email="ngModel"
+      id="input-email"
+      name="email"
+      pattern=".+@.+..+"
+      placeholder="Adres E-mail"
+      fullWidth
+      fieldSize="large"
+      [status]="email.dirty ? (email.invalid ? 'danger' : 'success') : 'basic'"
+      [required]="getConfigValue('forms.validation.email.required')"
+      [attr.aria-invalid]="email.invalid && email.touched ? true : null"
+    />
+    <ng-container *ngIf="email.invalid && email.touched">
+      <p *ngIf="email.errors?.required">To pole jest wymagane!</p>
+      <p *ngIf="email.errors?.pattern">Nieprawidłowy email!</p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-password">Hasło:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.password"
+      #password="ngModel"
+      type="password"
+      id="input-password"
+      name="password"
+      placeholder="Hasło"
+      fullWidth
+      fieldSize="large"
+      [status]="
+        password.dirty ? (password.invalid ? 'danger' : 'success') : 'basic'
+      "
+      [required]="getConfigValue('forms.validation.password.required')"
+      [minlength]="getConfigValue('forms.validation.password.minLength')"
+      [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+      [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+    />
+    <ng-container *ngIf="password.invalid && password.touched">
+      <p *ngIf="password.errors?.required">To pole jest wymagane!</p>
+      <p *ngIf="password.errors?.minlength || password.errors?.maxlength">
+        Hasło powinno mieć od
+        {{ getConfigValue("forms.validation.password.minLength") }} do
+        {{ getConfigValue("forms.validation.password.maxLength") }}
+        znaków
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-re-password">Potwierdź hasło:</label>
+    <input
+      nbInput
+      [(ngModel)]="user.rePass"
+      #rePass="ngModel"
+      type="password"
+      id="input-re-password"
+      name="rePass"
+      placeholder="Potwierdź hasło"
+      fullWidth
+      fieldSize="large"
+      [status]="
+        rePass.dirty
+          ? rePass.invalid || password.value != rePass.value
+            ? 'danger'
+            : 'success'
+          : 'basic'
+      "
+      [required]="true"
+      [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null"
+    />
+    <ng-container *ngIf="rePass.touched">
+      <p *ngIf="rePass.invalid && rePass.errors?.required">
+        To pole jest wymagane!
+      </p>
+      <p *ngIf="password.value != rePass.value && !rePass.errors?.required">
+        Hasła nie są zgodne.
+      </p>
+    </ng-container>
+  </div>
+
+  <button
+    fullWidth
+    status="primary"
+    size="large"
+    [disabled]="submitted || !form.valid || password.value != rePass.value"
+    [class.btn-pulse]="submitted"
+  >
+    Stwórz konto
+  </button>
+  <div class="register-p">
+    <p>Masz już konto? <a href="/login">Zaloguj się tutaj!</a></p>
+  </div>
+</form>

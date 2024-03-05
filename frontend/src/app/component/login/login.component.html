@@ -1,31 +1,101 @@
-<!-- <div class="container">
-  <h1>ZALOGUJ</h1>
-  <form>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
-    </div>
-    <div class="form-group">
-      <label for="password">HASŁO</label>
-      <input type="password" id="password" name="password" required />
-    </div>
-    <div class="form-group">
-      <button type="submit">Login</button>
-    </div>
-  </form>
-</div> -->
-<form>
+<nb-alert
+  *ngIf="showMessages.error && errors?.length && !submitted"
+  outline="danger"
+  role="alert"
+>
+  <p class="alert-title"><b>Coś poszło nie tak!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert
+  *ngIf="showMessages.success && messages?.length && !submitted"
+  outline="success"
+  role="alert"
+>
+  <p class="alert-title"><b>Udało się!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">
+      {{ message }}
+    </li>
+  </ul>
+</nb-alert>
+
+<form (ngSubmit)="login()" #form="ngForm" aria-labelledby="title">
   <div class="logo"><img src="../../assets/logoT.png" /></div>
 
   <h1>Logowanie</h1>
+  <div class="form-control-group">
+    <label for="input-email">Adres Email:</label>
+    <input
+      nbInput
+      fullWidth
+      [(ngModel)]="user.email"
+      #email="ngModel"
+      name="email"
+      id="input-email"
+      pattern=".+@.+\..+"
+      placeholder="Adres email"
+      fieldSize="large"
+      autofocus
+      [status]="email.dirty ? (email.invalid ? 'danger' : 'success') : 'basic'"
+      [required]="getConfigValue('forms.validation.email.required')"
+      [attr.aria-invalid]="email.invalid && email.touched ? true : null"
+    />
+    <ng-container *ngIf="email.invalid && email.touched">
+      <p class="danger" *ngIf="email.errors?.required">Email jest wymagany!</p>
+      <p class="danger" *ngIf="email.errors?.pattern">Nieprawidłowy email!</p>
+    </ng-container>
+  </div>
 
-  <label for="emial">Podaj Adres Email:</label>
-  <input type="email" placeholder="Email" id="email" />
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label for="input-password">Hasło:</label>
+    </span>
+    <input
+      nbInput
+      fullWidth
+      [(ngModel)]="user.password"
+      #password="ngModel"
+      name="password"
+      type="password"
+      id="input-password"
+      placeholder="Hasło"
+      fieldSize="large"
+      [status]="
+        password.dirty ? (password.invalid ? 'danger' : 'success') : 'basic'
+      "
+      [required]="getConfigValue('forms.validation.password.required')"
+      [minlength]="getConfigValue('forms.validation.password.minLength')"
+      [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+      [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+    />
+    <ng-container *ngIf="password.invalid && password.touched">
+      <p class="danger" *ngIf="password.errors?.required">
+        Hasło jest wymagane!
+      </p>
+      <p
+        class="danger"
+        *ngIf="password.errors?.minlength || password.errors?.maxlength"
+      >
+        Hasło powinno zawierać od
+        {{ getConfigValue("forms.validation.password.minLength") }} do
+        {{ getConfigValue("forms.validation.password.maxLength") }}
+        znaków
+      </p>
+    </ng-container>
+  </div>
+  <br />
 
-  <label for="password">Podaj Hasło:</label>
-  <input type="password" placeholder="Hasło" id="password" />
-
-  <button>ZALOGUJ</button>
+  <button
+    status="primary"
+    size="large"
+    [disabled]="submitted || !form.valid"
+    [class.btn-pulse]="submitted"
+  >
+    ZALOGUJ
+  </button>
   <div class="login-p">
     <p>Nie masz konta? <a href="/register">Zarejestruj się tutaj!</a></p>
   </div>

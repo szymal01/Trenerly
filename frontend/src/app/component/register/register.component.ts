@@ -1,5 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Dictionary } from '@fullcalendar/core/internal';
+import {
+  NB_AUTH_OPTIONS,
+  NbAuthResult,
+  NbAuthService,
+  NbAuthSocialLink,
+  NbLoginComponent,
+  getDeepFromObject,
+} from '@nebular/auth';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -7,46 +18,53 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
+  redirectDelay: number = 0;
+  showMessages: any = {};
+  strategy: string = '';
 
-  checked = false;
+  submitted = false;
+  errors: string[] = [];
+  messages: string[] = [];
+  user: any = {};
+  socialLinks: NbAuthSocialLink[] = [];
 
-  toggle(checked: boolean) {
-    this.checked = checked;
+  constructor(
+    protected service: UserService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected cd: ChangeDetectorRef,
+    protected router: Router
+  ) {
+    this.redirectDelay = this.getConfigValue('forms.register.redirectDelay');
+    this.showMessages = { error: true };
+    this.strategy = this.getConfigValue('forms.register.strategy');
+    this.socialLinks = this.getConfigValue('forms.login.socialLinks');
   }
 
-  linearMode = false;
-
-  toggleLinearMode() {
-    this.linearMode = !this.linearMode;
-  }
-
-  constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group(
-      {
-        username: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
+  register(): void {
+    this.errors = this.messages = [];
+    this.submitted = true;
+    this.service.registerUser(this.user).subscribe(
+      (response) => {
+        this.submitted = false;
+        if (response.email) {
+          this.router.navigate(['/login']);
+        } else {
+        }
       },
-      {
-        validator: this.passwordMatchValidator,
+      (error) => {
+        this.submitted = false;
+        console.log(
+          this.showMessages.error && this.errors?.length && !this.submitted
+        );
+        this.errors = [
+          'Użytkownik o podanym adresie E-mail lub podanej nazwie użytkownika już istnieje.',
+        ];
       }
     );
+    this.cd.detectChanges();
   }
 
-  passwordMatchValidator(formGroup: FormGroup) {
-    //const password = formGroup.get('password').value;
-    //const confirmPassword = formGroup.get('confirmPassword').value;
-    //return password === confirmPassword ? null : { passwordMismatch: true };
-  }
-
-  onSubmit() {
-    if (this.registerForm.valid) {
-      // Tutaj możesz dodać logikę rejestracji
-      console.log('Dane rejestracji:', this.registerForm.value);
-      // Przykład: Przekieruj do innej strony po poprawnej rejestracji
-      // this.router.navigate(['/login']);
-    }
+  getConfigValue(key: string): any {
+    return getDeepFromObject(this.options, key, null);
   }
 }

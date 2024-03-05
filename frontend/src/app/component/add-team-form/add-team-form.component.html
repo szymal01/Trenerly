@@ -1,0 +1,28 @@
+<nb-card>
+  <nb-card-header><h1>Dodaj drużynę</h1></nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="add_team()" #form="ngForm" aria-labelledby="title">
+      <label>Nazwa drużyny:</label>
+      <input
+        nbInput
+        [(ngModel)]="team.name"
+        #name="ngModel"
+        id="name"
+        name="name"
+        type="text"
+        placeholder="Nazwa"
+        [required]="true"
+        [attr.aria-invalid]="name.invalid && name.touched ? true : null"
+      />
+      <ng-container *ngIf="name.invalid && name.touched">
+        <p *ngIf="name.errors?.required">To pole jest wymagane!</p>
+      </ng-container>
+      <button
+        [disabled]="submitted || !form.valid"
+        [class.btn-pulse]="submitted"
+      >
+        Stwórz drużynę
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>

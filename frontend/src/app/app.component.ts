@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NbAuthService } from '@nebular/auth';
 import { NbMenuItem } from '@nebular/theme';
+import { Observable } from 'rxjs';
+import { CurrentUserService } from './services/current_user/current-user.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +11,14 @@ import { NbMenuItem } from '@nebular/theme';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  is_auth: boolean = false;
+  constructor(
+    private authService: NbAuthService,
+    private currentUser: CurrentUserService,
+    private router: Router
+  ) {}
   title = 'frontend';
+
   items: NbMenuItem[] = [
     {
       title: 'STRONA GŁÓWNA',
@@ -29,26 +40,30 @@ export class AppComponent implements OnInit {
       title: 'STATYSTYKI',
       link: '/statistics',
     },
+
     {
       title: 'PROFIL',
-      children: [
-        {
-          title: 'Mój profil',
-          link: '/profile',
-        },
-        {
-          title: 'Logowanie',
-          link: '/login',
-        },
-        {
-          title: 'Rejestracja',
-          link: '/register',
-        },
-        {
-          title: 'Wyloguj',
-        },
-      ],
+      link: '/profile',
     },
   ];
-  ngOnInit(): void {}
+  check_auth() {
+    this.authService
+      .isAuthenticated()
+      .subscribe((result) => (this.is_auth = result));
+    if (!this.is_auth) {
+      this.currentUser.logout();
+    }
+  }
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url != '/register') {
+          this.check_auth();
+        }
+      }
+    });
+  }
+  logout() {
+    this.currentUser.logout();
+  }
 }

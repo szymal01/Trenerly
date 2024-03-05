@@ -1,0 +1,149 @@
+<nb-card>
+  <nb-card-header><h1>Dodaj wydarzenie</h1></nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="add_team()" #form="ngForm" aria-labelledby="title">
+      <div class="main">
+        <div class="column">
+          <div class="add-container">
+            <label>Tytuł wydarzenia:</label>
+            <input
+              nbInput
+              [(ngModel)]="event.title"
+              #title="ngModel"
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Tytuł"
+              [required]="true"
+              [attr.aria-invalid]="title.invalid && title.touched ? true : null"
+            />
+            <ng-container *ngIf="title.invalid && title.touched">
+              <p *ngIf="title.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+          <div class="add-container">
+            <label>Data rozpoczęcia:</label>
+            <input
+              nbInput
+              [(ngModel)]="event.start_date"
+              #start_date="ngModel"
+              id="start_date"
+              name="start_date"
+              type="text"
+              placeholder="RRRR-MM-DD"
+              [required]="true"
+              [attr.aria-invalid]="
+                start_date.invalid && start_date.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="start_date.invalid && start_date.touched">
+              <p *ngIf="start_date.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+          <div class="add-container">
+            <label>Godzina rozpoczęcia:</label>
+            <input
+              nbInput
+              [(ngModel)]="event.start_time"
+              #start_time="ngModel"
+              id="start_time"
+              name="start_time"
+              type="text"
+              placeholder="HH:MM:SS"
+              [nbTimepicker]="timepickerStart"
+              [required]="true"
+              [attr.aria-invalid]="
+                start_time.invalid && start_time.touched ? true : null
+              "
+            />
+            <nb-timepicker #timepickerStart withSeconds></nb-timepicker>
+            <ng-container *ngIf="start_time.invalid && start_time.touched">
+              <p *ngIf="start_time.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="column">
+          <div class="add-container">
+            <label>Drużyna</label>
+            <nb-select placeholder="Select Showcase" [(selected)]="event.team">
+              <nb-option *ngFor="let team of teams" value="{{ team.name }}">{{
+                team.name
+              }}</nb-option>
+            </nb-select>
+            <p *ngIf="event.team">To pole jest wymagane!</p>
+          </div>
+
+          <div class="add-container">
+            <label>Data zakończenia:</label>
+            <input
+              nbInput
+              [(ngModel)]="event.end_date"
+              #end_date="ngModel"
+              id="end_date"
+              name="end_date"
+              type="text"
+              placeholder="RRRR-MM-DD"
+              [required]="true"
+              [attr.aria-invalid]="
+                end_date.invalid && end_date.touched ? true : null
+              "
+            />
+            <ng-container *ngIf="end_date.invalid && end_date.touched">
+              <p *ngIf="end_date.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+          <div class="add-container">
+            <label>Godzina zakończenia:</label>
+            <input
+              nbInput
+              [(ngModel)]="event.end_time"
+              #end_time="ngModel"
+              id="end_time"
+              name="end_time"
+              type="text"
+              placeholder="HH:MM:SS"
+              [nbTimepicker]="timepicker"
+              [required]="true"
+              [attr.aria-invalid]="
+                end_time.invalid && end_time.touched ? true : null
+              "
+            />
+            <nb-timepicker #timepicker withSeconds></nb-timepicker>
+            <ng-container *ngIf="end_time.invalid && end_time.touched">
+              <p *ngIf="end_time.errors?.required">To pole jest wymagane!</p>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- <div
+        class="add-container"
+        *ngIf="option.value == 2 || option.value == 3 || option.value == 4"
+      >
+        <label>Data ostatniego wydarzenia w cyklu:</label>
+        <input
+          nbInput
+          [(ngModel)]="last_date"
+          #last_date="ngModel"
+          id="last_date"
+          name="last_date"
+          type="text"
+          placeholder="RRRR-MM-DD"
+          [required]="true"
+          [attr.aria-invalid]="
+            last_date.invalid && last_date.touched ? true : null
+          "
+        />
+        <ng-container *ngIf="last_date.invalid && last_date.touched">
+          <p *ngIf="last_date.errors?.required">To pole jest wymagane!</p>
+        </ng-container>
+      </div> -->
+      </div>
+      <button
+        [disabled]="submitted || !form.valid || !event.team"
+        [class.btn-pulse]="submitted"
+      >
+        Stwórz wydarzenie
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>

@@ -9,9 +9,17 @@ import { MessagesComponent } from './component/messages/messages.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
 import { StatuteComponent } from './component/statute/statute.component';
+import { PermissionGuard } from './guards/permissions.guards';
+import { PlayerStatisticsComponent } from './component/player-statistics/player-statistics.component';
+import { TeamListComponent } from './component/team-list/team-list.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent }, // Strona główna
+  {
+    path: 'home',
+    component: HomeComponent,
+    canLoad: [PermissionGuard],
+    data: { required_perms: ['dsasads'] },
+  }, // Strona główna
   { path: 'login', component: LoginComponent }, // Strona logowania
   { path: 'register', component: RegisterComponent }, // Strona rejestracji
   { path: 'calendar', component: CalendarComponent }, // Strona kalendarza
@@ -20,6 +28,8 @@ const routes: Routes = [
   { path: 'statistics', component: StatisticsComponent }, //Strona widoku statystyk
   { path: 'profile', component: ProfileComponent }, //Strona profilowa
   { path: 'statute', component: StatuteComponent }, //Strona widoku regulaminy i polityki prywatności
+  { path: 'player-statistics', component: PlayerStatisticsComponent },
+  { path: 'team-list', component: TeamListComponent },
 ];
 
 @NgModule({

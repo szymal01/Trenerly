@@ -4,7 +4,8 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['name','surname','username','role','email','phone_number','team','medical_tests','birth_details']
+        extra_kwargs = {'password': {'write_only': True}}
+        fields = ['username','first_name','last_name','email','password','phone_number','medical_tests_deadline','birth_details']
 
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,7 +19,7 @@ class CoachSerializer(serializers.ModelSerializer):
         fields = ['surname','username']
                   
 class TeamSerializer(serializers.ModelSerializer):
-    coach = CoachSerializer()
+    #coach = CoachSerializer()
     class Meta:
         model = Team
-        fields = ['name','coach']
+        fields = ['name']#,'coach']
