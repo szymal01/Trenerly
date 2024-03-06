@@ -1,0 +1,84 @@
+<nb-card>
+  <nb-card-header><h1>Dodaj lokalizację</h1></nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="add_location()" #form="ngForm" aria-labelledby="title">
+      <div class="add-container">
+        <label>Nazwa lokalizacji:</label>
+        <input
+          nbInput
+          [(ngModel)]="location.name"
+          #name="ngModel"
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Nazwa"
+          [required]="true"
+          [attr.aria-invalid]="name.invalid && name.touched ? true : null"
+        />
+        <ng-container *ngIf="name.invalid && name.touched">
+          <p *ngIf="name.errors?.required">To pole jest wymagane!</p>
+        </ng-container>
+      </div>
+      <div class="add-container">
+        <label>Miasto:</label>
+        <input
+          nbInput
+          [(ngModel)]="location.city"
+          #city="ngModel"
+          id="city"
+          name="city"
+          type="text"
+          placeholder="Miasto"
+          [required]="true"
+          [attr.aria-invalid]="city.invalid && city.touched ? true : null"
+        />
+        <ng-container *ngIf="city.invalid && city.touched">
+          <p *ngIf="city.errors?.required">To pole jest wymagane!</p>
+        </ng-container>
+      </div>
+      <div class="add-container">
+        <label>Ulica:</label>
+        <input
+          nbInput
+          [(ngModel)]="location.street"
+          #street="ngModel"
+          id="street"
+          name="street"
+          type="text"
+          placeholder="Ulica"
+          [required]="true"
+          [attr.aria-invalid]="street.invalid && street.touched ? true : null"
+        />
+
+        <ng-container *ngIf="street.invalid && street.touched">
+          <p *ngIf="street.errors?.required">To pole jest wymagane!</p>
+        </ng-container>
+      </div>
+
+      <div class="add-container">
+        <label>Numer:</label>
+        <input
+          nbInput
+          [(ngModel)]="location.number"
+          #number="ngModel"
+          id="number"
+          name="number"
+          type="text"
+          placeholder="Numer"
+          [required]="true"
+          [attr.aria-invalid]="number.invalid && number.touched ? true : null"
+        />
+        <ng-container *ngIf="number.invalid && number.touched">
+          <p *ngIf="number.errors?.required">To pole jest wymagane!</p>
+        </ng-container>
+      </div>
+
+      <button
+        [disabled]="submitted || !form.valid"
+        [class.btn-pulse]="submitted"
+      >
+        Stwórz wydarzenie
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>

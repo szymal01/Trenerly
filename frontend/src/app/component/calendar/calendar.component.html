@@ -28,7 +28,16 @@
 <nb-card class="home_menu">
   <nb-card-header>
     <h1>Kalendarz</h1>
-    <button class="add_button" (click)="addEvent()">Dodaj wydarzenie</button>
+    <button class="add_button" (click)="addEvent()" *requiredPerms="['COACH']">
+      Dodaj wydarzenie
+    </button>
+    <button
+      class="add_button"
+      (click)="addLocation()"
+      *requiredPerms="['COACH']"
+    >
+      Dodaj lokalizację
+    </button>
   </nb-card-header>
   <nb-card-body>
     <div class="container">

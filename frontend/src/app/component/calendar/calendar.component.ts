@@ -11,6 +11,7 @@ import { EventService } from '../../services/event/event.service';
 import { formatDate } from '@angular/common';
 import { StatsFormComponent } from '../stats-form/stats-form.component';
 import { AddEventFormComponent } from '../add-event-form/add-event-form.component';
+import { AddLocationFormComponent } from '../add-location-form/add-location-form.component';
 
 @Component({
   selector: 'app-calendar',
@@ -94,5 +95,8 @@ export class CalendarComponent {
 
   addEvent() {
     this.dialogService.open(AddEventFormComponent).onClose.subscribe();
+  }
+  addLocation() {
+    this.dialogService.open(AddLocationFormComponent).onClose.subscribe();
   }
 }

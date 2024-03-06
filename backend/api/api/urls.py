@@ -6,7 +6,7 @@ from events.views import LocationViewSet, EventViewSet
 from user.views import RegisterViewSet, TeamViewSet, UserViewSet
 
 router = routers.DefaultRouter()
-router.register(r'location', LocationViewSet)
+router.register(r'location', LocationViewSet, basename='location')
 router.register(r'event', EventViewSet,basename='events')
 router.register(r'users', UserViewSet, basename='users')
 router.register(r'register',RegisterViewSet, basename='register')

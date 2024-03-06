@@ -1,5 +1,7 @@
 <h1 id="title-teams">Moje drużyny</h1>
-<button class="add_button" (click)="addTeam()">Dodaj drużynę</button>
+<button class="add_button" (click)="addTeam()" *requiredPerms="['COACH']">
+  Dodaj drużynę
+</button>
 
 <div class="container">
   <div *ngFor="let team of teams">

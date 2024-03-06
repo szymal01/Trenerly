@@ -62,6 +62,7 @@ import { EditProfileFormComponent } from './component/edit-profile-form/edit-pro
 import { PlayerStatisticsComponent } from './component/player-statistics/player-statistics.component';
 import { TeamListComponent } from './component/team-list/team-list.component';
 import { PermRequiredDirective } from './directives/perm-required.derective';
+import { AddLocationFormComponent } from './component/add-location-form/add-location-form.component';
 
 registerLocaleData(localePl);
 
@@ -84,6 +85,7 @@ registerLocaleData(localePl);
     PlayerStatisticsComponent,
     TeamListComponent,
     PermRequiredDirective,
+    AddLocationFormComponent,
   ],
   imports: [
     BrowserModule,

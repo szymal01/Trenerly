@@ -13,4 +13,7 @@ export class LocationService {
   getLocationsList() {
     return this.http.get(this.apiUrl + 'location');
   }
+  addLocation(locationData: any) {
+    return this.http.post<any>('http://127.0.0.1:8000/location/', locationData);
+  }
 }

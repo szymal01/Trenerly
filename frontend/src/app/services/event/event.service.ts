@@ -13,4 +13,7 @@ export class EventService {
   getEventsList(params?: any) {
     return this.http.get(this.apiUrl + 'event', { params: params });
   }
+  addEvent(eventData: any) {
+    return this.http.post<any>('http://127.0.0.1:8000/event/', eventData);
+  }
 }
