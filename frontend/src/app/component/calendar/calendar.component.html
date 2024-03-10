@@ -59,8 +59,27 @@
                   </p></nb-accordion-item-header
                 >
                 <nb-accordion-item-body
-                  ><p>{{ event.location_name }}</p></nb-accordion-item-body
-                >
+                  ><p>
+                    <strong>Data rozpoczęcia:</strong>
+                    {{ event.start_date }} o {{ event.start_time }}
+                  </p>
+                  <p>
+                    <strong>Data zakończenia:</strong> {{ event.end_date }} o
+                    {{ event.end_time }}
+                  </p>
+                  <p>
+                    <strong>Lokalizacja:</strong>
+                    {{ event.location.name }} ({{ event.location.city }}, ul.
+                    {{ event.location.street }} {{ event.location.number }})
+                  </p>
+                  <p><strong>Zespół:</strong> {{ event.team.name }}</p>
+                  <p *ngIf="event.type.id == 1">
+                    Opis treningu: {{ event.exercises }}
+                  </p>
+                  <!-- <div *ngIf="event.type == '2'">
+                    <button (click)="addStats()">Dodaj statystyki</button>
+                  </div> -->
+                </nb-accordion-item-body>
               </nb-accordion-item>
             </nb-accordion>
           </div>

@@ -43,7 +43,7 @@ export class EditProfileFormComponent implements OnInit {
       });
   }
   updateUser(): void {
-    this.user.first_name = 'ukhjnl';
+    console.log(this.user.birth_details);
     this.userService
       .updateUser(this.get_currentUserUUID(), this.user)
       .subscribe((data: any) => {

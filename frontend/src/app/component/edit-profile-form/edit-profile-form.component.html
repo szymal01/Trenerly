@@ -204,25 +204,25 @@
               </p>
             </ng-container>
           </div>
-          <div class="form-control-group">
-            <label for="input-birht_details">Data urodzenia:</label>
+          <div class="form-control-group" *ngIf="user.role == '3'">
+            <label for="input-birth_details">Data urodzenia:</label>
             <input
               nbInput
-              [(ngModel)]="user.birht_details"
-              #birht_details="ngModel"
+              [(ngModel)]="user.birth_details"
+              #birth_details="ngModel"
               type="text"
-              id="input-birht_details"
-              name="birht_details"
+              id="input-birth_details"
+              name="birth_details"
               placeholder="Data"
               fullWidth
               fieldSize="large"
               [attr.aria-invalid]="
-                birht_details.invalid && birht_details.touched ? true : null
+                birth_details.invalid && birth_details.touched ? true : null
               "
             />
           </div>
 
-          <div class="form-control-group">
+          <div class="form-control-group" *ngIf="user.role == '3'">
             <label for="input-medical_tests_deadline"
               >Data ważności badań:</label
             >

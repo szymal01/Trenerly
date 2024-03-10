@@ -27,7 +27,7 @@ export class CalendarComponent {
     locale: 'pl',
   };
   today = new Date();
-  events?: CalendarEvent[];
+  events: any;
   todayStr: string;
 
   range: NbCalendarRange<Date>;
@@ -89,12 +89,11 @@ export class CalendarComponent {
   ngOnInit(): void {
     this.getEvents();
   }
-  addStats() {
-    this.dialogService.open(StatsFormComponent).onClose.subscribe();
-  }
 
   addEvent() {
-    this.dialogService.open(AddEventFormComponent).onClose.subscribe();
+    this.dialogService
+      .open(AddEventFormComponent)
+      .onClose.subscribe(() => this.getEvents());
   }
   addLocation() {
     this.dialogService.open(AddLocationFormComponent).onClose.subscribe();

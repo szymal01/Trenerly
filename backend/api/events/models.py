@@ -38,7 +38,7 @@ class Event(models.Model):
 class PlayerMatchStatistics(models.Model):
     
     player = models.ForeignKey(User, on_delete=models.PROTECT)
-    match = models.ForeignKey(Event, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50,null=True, blank=True)
     
     points = models.IntegerField()
     

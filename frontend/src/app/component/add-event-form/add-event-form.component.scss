@@ -64,7 +64,7 @@ nb-layout {
 
 form {
   margin: auto;
-  min-height: 700px;
+  min-height: 800px;
   // //justify-content: space-between;
 }
 
@@ -123,4 +123,9 @@ button {
 .main {
   display: flex;
   flex-wrap: wrap;
+}
+
+#exercises {
+  width: 200px;
+  height: 100px;
 }

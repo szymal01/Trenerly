@@ -33,10 +33,6 @@ export class AppComponent implements OnInit {
       link: '/teams',
     },
     {
-      title: 'WIADOMOŚCI',
-      link: '/messages',
-    },
-    {
       title: 'STATYSTYKI',
       link: '/statistics',
     },

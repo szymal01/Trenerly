@@ -1,14 +1,196 @@
 <nb-card>
-  <nb-card-header><h1>Statystyki meczowe</h1></nb-card-header>
+  <nb-card-header><h1>Dodaj statystyki</h1></nb-card-header>
   <nb-card-body>
-    <ul>
-      <li>
-        <p>Imie Nazwisko</p>
-        <form>
-          <label>Imie Nazwisko</label>
-          <input type="number" />
-        </form>
-      </li>
-    </ul>
-  </nb-card-body>
+    <form (ngSubmit)="add_stats()" #form="ngForm" aria-labelledby="title">
+      <div class="add-container">
+        <label>Tytuł:</label>
+        <input
+          nbInput
+          [(ngModel)]="stats.title"
+          #title="ngModel"
+          id="title"
+          name="title"
+          type="text"
+        />
+      </div>
+      <div class="main">
+        <div class="column">
+          <div class="add-container">
+            <label>Zawodnik</label>
+            <nb-select placeholder="Wybierz typ" [(selected)]="player.id">
+              <nb-option *ngFor="let user of users" value="{{ user.id }}"
+                >{{ user.first_name }} {{ user.last_name }}</nb-option
+              >
+            </nb-select>
+            <p *ngIf="!player.id">To pole jest wymagane!</p>
+          </div>
+
+          <div class="add-container">
+            <label>Punkty:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.points"
+              #points="ngModel"
+              id="points"
+              name="points"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość zagrywek:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.service_sum"
+              #service_sum="ngModel"
+              id="service_sum"
+              name="service_sum"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość błędów w zagrywce:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.service_errors"
+              #service_errors="ngModel"
+              id="service_errors"
+              name="service_errors"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość asów:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.ace"
+              #ace="ngModel"
+              id="ace"
+              name="ace"
+              type="number"
+            />
+          </div>
+        </div>
+        <div class="column">
+          <div class="add-container">
+            <label>Ilość ataków:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.spikes"
+              #spikes="ngModel"
+              id="spikes"
+              name="spikes"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość błędnych ataków:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.spike_errors"
+              #spike_errors="ngModel"
+              id="spike_errors"
+              name="spike_errors"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość zablokowanych ataków:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.spikes_blocked"
+              #spikes_blocked="ngModel"
+              id="spikes_blocked"
+              name="spikes_blocked"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość punktowych ataków:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.spike_points"
+              #spike_points="ngModel"
+              id="spike_points"
+              name="spike_points"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość przyjęć:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.receive_sum"
+              #receive_sum="ngModel"
+              id="receive_sum"
+              name="receive_sum"
+              type="number"
+            />
+          </div>
+        </div>
+        <div class="column">
+          <div class="add-container">
+            <label>Ilość błędów przyjęcia:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.receive_errors"
+              #receive_errors="ngModel"
+              id="receive_errors"
+              name="receive_errors"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość przyjęć negatywnych:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.receive_negative"
+              #receive_negative="ngModel"
+              id="receive_negative"
+              name="receive_negative"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość przyjęć pozytywnych:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.receive_positive"
+              #receive_positive="ngModel"
+              id="receive_positive"
+              name="receive_positive"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość przyjęć perfekcyjnych:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.receive_perfect"
+              #receive_perfect="ngModel"
+              id="receive_perfect"
+              name="receive_perfect"
+              type="number"
+            />
+          </div>
+          <div class="add-container">
+            <label>Ilość bloków:</label>
+            <input
+              nbInput
+              [(ngModel)]="stats.blocks"
+              #blocks="ngModel"
+              id="blocks"
+              name="blocks"
+              type="number"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        [disabled]="submitted || !form.valid || !player.id"
+        [class.btn-pulse]="submitted"
+      >
+        Dodaj
+      </button>
+    </form></nb-card-body
+  >
 </nb-card>

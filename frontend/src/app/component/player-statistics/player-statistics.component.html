@@ -1,15 +1,38 @@
 <nb-card>
-  <nb-card-header> <h1>Statystyki gracza</h1> </nb-card-header>
+  <nb-card-header>
+    <h1>Statystyki gracza</h1>
+  </nb-card-header>
   <nb-card-body>
-    <nb-list>
+    <nb-list *ngFor="let stat of stats">
       <nb-list-item>
-        <p>siema</p>
-      </nb-list-item>
-      <nb-list-item>
-        <p>siema</p>
-      </nb-list-item>
-      <nb-list-item>
-        <p>siema</p>
+        <p>
+          <span>{{ stat.title }}</span> <br /><br />
+          Punkty: <span class="liczba">{{ stat.points }}</span> <br /><br />
+          Zagrywki: <span class="liczba">{{ stat.service_sum }}</span> - Błędy:
+          <span class="liczba">{{ stat.service_errors }}</span> - Asy:
+          <span class="liczba">{{ stat.ace }}</span> <br /><br />
+          Ataki: <span class="liczba">{{ stat.spikes }}</span> - Błędy:
+          <span class="liczba">{{ stat.spike_errors }}</span> - Zablokowane:
+          <span class="liczba">{{ stat.spikes_blocked }}</span> Punktowe:
+          <span class="liczba">{{ stat.spike_points }}</span> - Procent
+          skuteczności w ataku:
+          <span class="liczba"
+            >{{ ((stat.spike_points / stat.spikes) * 100).toFixed(0) }}%</span
+          ><br /><br />
+          Przyjęcia: <span class="liczba">{{ stat.receive_sum }}</span> - Błędy:
+          <span class="liczba">{{ stat.receive_negative }}</span> - Negatywne:
+          <span class="liczba">{{ stat.receive_sum }}</span> - Pozytywne:
+          <span class="liczba">{{ stat.receive_positive }}</span> - Perfekcyjne:
+          <span class="liczba">{{ stat.receive_perfect }}</span> - Procent
+          perfekcyjnych przyjęć:
+          <span class="liczba"
+            >{{
+              ((stat.receive_perfect / stat.receive_sum) * 100).toFixed(0)
+            }}%</span
+          ><br />
+          <br />
+          Bloki: <span class="liczba">{{ stat.blocks }}</span>
+        </p>
       </nb-list-item>
     </nb-list>
   </nb-card-body>

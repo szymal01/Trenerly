@@ -11,9 +11,18 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   getEventsList(params?: any) {
-    return this.http.get(this.apiUrl + 'event', { params: params });
+    return this.http.get(this.apiUrl + 'events', { params: params });
   }
   addEvent(eventData: any) {
-    return this.http.post<any>('http://127.0.0.1:8000/event/', eventData);
+    return this.http.post<any>('http://127.0.0.1:8000/events/', eventData);
+  }
+  getEventTypesList() {
+    return this.http.get('http://127.0.0.1:8000/event_types/');
+  }
+  addStats(statsData: any) {
+    return this.http.post<any>('http://127.0.0.1:8000/stats/', statsData);
+  }
+  getStats(params?: any) {
+    return this.http.get('http://127.0.0.1:8000/stats/', { params: params });
   }
 }

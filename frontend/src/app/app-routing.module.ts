@@ -5,10 +5,8 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { CalendarComponent } from './component/calendar/calendar.component';
 import { TeamsComponent } from './component/teams/teams.component';
-import { MessagesComponent } from './component/messages/messages.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
-import { StatuteComponent } from './component/statute/statute.component';
 import { PermissionGuard } from './guards/permissions.guards';
 import { PlayerStatisticsComponent } from './component/player-statistics/player-statistics.component';
 import { TeamListComponent } from './component/team-list/team-list.component';
@@ -24,12 +22,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent }, // Strona rejestracji
   { path: 'calendar', component: CalendarComponent }, // Strona kalendarza
   { path: 'teams', component: TeamsComponent }, // Strona widoku drużyn
-  { path: 'messages', component: MessagesComponent }, // Strona widoku wiadomości
   { path: 'statistics', component: StatisticsComponent }, //Strona widoku statystyk
   { path: 'profile', component: ProfileComponent }, //Strona profilowa
-  { path: 'statute', component: StatuteComponent }, //Strona widoku regulaminy i polityki prywatności
-  { path: 'player-statistics', component: PlayerStatisticsComponent },
-  { path: 'team-list', component: TeamListComponent },
+  { path: 'statistics/:id', component: PlayerStatisticsComponent },
+  { path: 'teams/:id', component: TeamListComponent },
 ];
 
 @NgModule({

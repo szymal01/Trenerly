@@ -37,10 +37,8 @@ import { RegisterComponent } from './component/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { CalendarComponent } from './component/calendar/calendar.component';
 import { TeamsComponent } from './component/teams/teams.component';
-import { MessagesComponent } from './component/messages/messages.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
-import { StatuteComponent } from './component/statute/statute.component';
 import { LocationService } from './services/location/location.service';
 import { EventService } from './services/event/event.service';
 import localePl from '@angular/common/locales/pl';
@@ -74,10 +72,8 @@ registerLocaleData(localePl);
     RegisterComponent,
     CalendarComponent,
     TeamsComponent,
-    MessagesComponent,
     ProfileComponent,
     StatisticsComponent,
-    StatuteComponent,
     StatsFormComponent,
     AddEventFormComponent,
     AddTeamFormComponent,

@@ -1,4 +1,4 @@
 export interface Team {
-  id: number | null;
+  id: string | null;
   name: string | null;
 }

@@ -1,18 +1,16 @@
 <h1 id="title-stats">Statystyki</h1>
-<nb-search type="rotate-layout"></nb-search
-><nb-card>
-  <nb-card-header>Wyszukiwanie dla:</nb-card-header>
-  <nb-card-body>
-    <h3>{{ value || "-" }}</h3>
-  </nb-card-body>
-</nb-card>
+<button class="add_button" (click)="addStats()" *requiredPerms="['COACH']">
+  Dodaj statystyki
+</button>
+
 <div class="container">
   <div *ngFor="let user of users">
-    <a href="player-statistics">
-      <nb-card class="player-card">
+    <a (click)="go_to_player_stats(user.id)">
+      <nb-card class="player-card" *ngIf="user.role == '3'">
         <img src="../../assets/logo.png" />
-        <h1>{{ user.first_name }}</h1>
-        <h4>Drużyna</h4>
+        <h2>{{ user.first_name }}</h2>
+        <h3>{{ user.last_name }}</h3>
+        <h4>{{ user.username }}</h4>
       </nb-card></a
     >
   </div>

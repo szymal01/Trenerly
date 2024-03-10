@@ -108,3 +108,10 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+.add-container {
+  margin: 20px 20px 20px 20px;
+}

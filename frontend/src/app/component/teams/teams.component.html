@@ -5,7 +5,7 @@
 
 <div class="container">
   <div *ngFor="let team of teams">
-    <a href="team-list">
+    <a (click)="goToTeamDetail(team.id)">
       <nb-card class="team-card">
         <img src="../../assets/logoT.png" />
         <h1>{{ team.name }}</h1>

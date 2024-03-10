@@ -23,6 +23,10 @@ h2 {
 
 h3 {
   font-family: "myfont", sans-serif;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 h4 {
@@ -114,8 +118,8 @@ nb-card-header h1 {
   color: white;
 }
 
-.calendar {
-  max-width: 600px;
+accordion-with-scroll {
+  max-height: 300px;
   margin: auto;
 }
 

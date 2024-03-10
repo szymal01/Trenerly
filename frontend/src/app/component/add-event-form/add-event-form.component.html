@@ -5,6 +5,17 @@
       <div class="main">
         <div class="column">
           <div class="add-container">
+            <label>Typ</label>
+            <nb-select placeholder="Wybierz typ" [(selected)]="event.type_name">
+              <nb-option
+                *ngFor="let event_type of event_types"
+                value="{{ event_type.name }}"
+                >{{ event_type.name }}</nb-option
+              >
+            </nb-select>
+            <p *ngIf="!event.type_name">To pole jest wymagane!</p>
+          </div>
+          <div class="add-container">
             <label>Tytuł wydarzenia:</label>
             <input
               nbInput
@@ -67,18 +78,21 @@
         <div class="column">
           <div class="add-container">
             <label>Drużyna</label>
-            <nb-select placeholder="Wybierz drużynę" [(selected)]="event.team">
+            <nb-select
+              placeholder="Wybierz drużynę"
+              [(selected)]="event.team_name"
+            >
               <nb-option *ngFor="let team of teams" value="{{ team.name }}">{{
                 team.name
               }}</nb-option>
             </nb-select>
-            <p *ngIf="!event.team">To pole jest wymagane!</p>
+            <p *ngIf="!event.team_name">To pole jest wymagane!</p>
           </div>
           <div class="add-container">
             <label>Lokalizacja</label>
             <nb-select
               placeholder="Wybierz lokalizację"
-              [(selected)]="event.location"
+              [(selected)]="event.location_name"
             >
               <nb-option
                 *ngFor="let location of locations"
@@ -86,7 +100,7 @@
                 >{{ location.name }}</nb-option
               >
             </nb-select>
-            <p *ngIf="!event.location">To pole jest wymagane!</p>
+            <p *ngIf="!event.location_name">To pole jest wymagane!</p>
           </div>
 
           <div class="add-container">
@@ -131,10 +145,36 @@
               <p *ngIf="end_time.errors?.required">To pole jest wymagane!</p>
             </ng-container>
           </div>
+          <div class="add-container">
+            <label>Opis treningu:</label>
+            <input
+              nbInput
+              [(ngModel)]="event.exercises"
+              #exercises="ngModel"
+              id="exercises"
+              name="exercises"
+              type="text"
+              placeholder="Opis"
+            />
+          </div>
         </div>
       </div>
+      <!-- <div class="add-container" *ngIf="event.type == 1">
+        <label>Opis treningu:</label>
+        <textarea
+          [(ngModel)]="event.exercises"
+          #exercises="ngModel"
+          id="exercises"
+          name="exercises"
+          type="text"
+          placeholder="Opis"
+          rows="4"
+          cols="50"
+        >
+        </textarea>
+      </div> -->
       <button
-        [disabled]="submitted || !form.valid || !event.team"
+        [disabled]="submitted || !form.valid"
         [class.btn-pulse]="submitted"
       >
         Stwórz wydarzenie

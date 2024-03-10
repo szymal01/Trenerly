@@ -21,7 +21,8 @@ export class TeamsComponent implements OnInit {
   constructor(
     private searchService: NbSearchService,
     private dialogService: NbDialogService,
-    private service: AddTeamService
+    private service: AddTeamService,
+    private router: Router
   ) {
     this.searchService.onSearchSubmit().subscribe((data: any) => {
       this.value = data.term;
@@ -40,5 +41,9 @@ export class TeamsComponent implements OnInit {
   }
   ngOnInit() {
     this.get_teams();
+  }
+
+  goToTeamDetail(teamId: any) {
+    this.router.navigate(['/teams', teamId]);
   }
 }

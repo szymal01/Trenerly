@@ -32,8 +32,8 @@ class User(AbstractUser):
     uuid = models.UUIDField(primary_key=False, default=uuid.uuid4, editable=True)
     email = models.EmailField("Adres E-mail", max_length=254, unique=True, null=False, blank=False)
     role = models.ForeignKey(Role, on_delete=models.CASCADE, null=True, blank=True)
-    phone_number = models.CharField(max_length=9)
-    team = models.ManyToManyField(Team)
+    phone_number = models.CharField(max_length=9, null=True, blank=True)
+    team = models.ManyToManyField(Team, null=True, blank=True)
     medical_tests_deadline = models.DateField(null=True, blank=True)
     birth_details = models.DateField(null=True,blank=True)
     def __str__(self):

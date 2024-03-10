@@ -3,13 +3,15 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework import status
+from rest_framework.decorators import action
 from .models import Team, User
-from .serializer import UserSerializer,TeamSerializer
+from .serializer import UserSerializer,TeamSerializer,TeamFullSerializer
 
 class UserViewSet(viewsets.ViewSet):
     lookup_field = 'uuid'
     def get_queryset(self):
         return User.objects.all()
+        
     def retrieve(self,request,uuid=None):
         
         user=get_object_or_404(self.get_queryset(), uuid=uuid) 
@@ -33,6 +35,13 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(self.get_queryset(), many=True)
         return Response(serializer.data)
     
+    @action(methods=['POST'],detail=False,permission_classes=(IsAuthenticated,))
+    def add_player_to_team(self,request,uuid=None):
+        user=get_object_or_404(User,email=request.data.get('email'))
+        team = get_object_or_404(Team, id=request.data.get('teamId'))
+        user.team.add(team)
+        return Response()
+    
         
 class TeamViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
@@ -40,10 +49,14 @@ class TeamViewSet(viewsets.ModelViewSet):
     def list(self,request):
         serializer = TeamSerializer(self.get_queryset(), many=True)
         return Response(serializer.data)
+    
+    def retrieve(self, request, *args, **kwargs):
+        team = self.get_object()
+        serializer = TeamFullSerializer(team)
+        return Response(serializer.data)
          
     def create(self, request):
-        if request.user.role.sulg == 'PLAYER' :
-            return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
+
         serializer = TeamSerializer(data=request.data)
         if serializer.is_valid():
             team_data = serializer.data
@@ -79,3 +92,5 @@ class RegisterViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    

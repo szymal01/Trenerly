@@ -9,8 +9,8 @@
     <p class="name">{{ user?.last_name }}</p>
     <div class="main">
       <div class="column">
-        <p class="role">{{ user.role }}</p>
-        <p *ngif="!user.role" class="role">Nie masz jeszcze przypisanej roli</p>
+        <p *ngIf="user.role == '3'" class="role">Zawodnik</p>
+        <p *ngIf="user.role == '2'" class="role">Trener</p>
         <h4>Nazwa użytkownika:</h4>
         <p class="email">{{ user.username }}</p>
         <h4>Adres E-mail:</h4>
@@ -18,7 +18,7 @@
         <h4>Numer telefonu:</h4>
         <p class="number">{{ user.phone_number }}</p>
       </div>
-      <div class="column">
+      <div class="column" *ngIf="user.role == '3'">
         <h5>Data urodzenia:</h5>
         <p>{{ user.birth_details }}</p>
         <h5>Badania ważne do:</h5>
@@ -32,11 +32,12 @@
           </li>
         </ul>
       </div>
+      <div class="column" *ngIf="user.role == '2'"></div>
     </div>
   </nb-card-body>
   <nb-card-footer
     ><div class="buttons">
-      <button (click)="updateUser()">Edytuj</button> <button>Statystyki</button>
+      <button (click)="updateUser()">Edytuj</button>
     </div></nb-card-footer
   >
 </nb-card>

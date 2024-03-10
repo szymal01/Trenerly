@@ -1,16 +1,52 @@
 <nb-card>
-  <nb-card-header> <h1>Drużyna</h1> </nb-card-header>
+  <nb-card-header>
+    <h1>Drużyna</h1>
+  </nb-card-header>
   <nb-card-body>
-    <nb-list>
+    <nb-list *ngFor="let user of team.users">
       <nb-list-item>
-        <p>siema</p>
-      </nb-list-item>
-      <nb-list-item>
-        <p>siema</p>
-      </nb-list-item>
-      <nb-list-item>
-        <p>siema</p>
+        <p>
+          {{ user.first_name }} {{ user.last_name }}
+          <span *ngIf="user.role == '2'"
+            >- Trener -> Kontakt: e-mail: {{ user.email }}, Tel:
+            {{ user.phone_number }}</span
+          >
+          <span *ngIf="user.role == '3'">
+            - Termin badań: {{ user.medical_tests_deadline }}</span
+          >
+        </p>
       </nb-list-item>
     </nb-list>
+    <form
+      (ngSubmit)="add_playerToTeam()"
+      #form="ngForm"
+      aria-labelledby="title"
+      *requiredPerms="['COACH']"
+    >
+      <div class="add-form">
+        <h1>Dodaj użytkownika</h1>
+        <label for="input-email">Adres e-mail:</label>
+        <input
+          nbInput
+          [(ngModel)]="player.email"
+          #email="ngModel"
+          id="input-email"
+          name="email"
+          placeholder="Adres E-mail"
+          [required]="true"
+          [attr.aria-invalid]="email.invalid && email.touched ? true : null"
+        />
+        <ng-container *ngIf="email.invalid && email.touched">
+          <p *ngIf="email.errors?.required">To pole jest wymagane!</p>
+        </ng-container>
+      </div>
+
+      <button
+        [disabled]="submitted || !form.valid"
+        [class.btn-pulse]="submitted"
+      >
+        Dodaj
+      </button>
+    </form>
   </nb-card-body>
 </nb-card>
